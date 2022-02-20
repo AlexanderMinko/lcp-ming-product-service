@@ -1,0 +1,24 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/test
+
+mongock:
+  change-logs-scan-package: com.socket.productservice.repository.changelog
+
+logging:
+  level:
+    com.lenovo.productservice: debug
+    org.apache.kafka: warn
+
+server:
+  port: 8090
+
+springdoc:
+  version: 1.0
+
+application:
+  web-security-config:
+    custom-unsecured-endpoints: /products/**, /categories
+
+
