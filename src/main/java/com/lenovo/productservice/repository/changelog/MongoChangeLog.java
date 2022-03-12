@@ -273,8 +273,233 @@ public class MongoChangeLog {
                 .price(18.99)
                 .build();
 
-        var coffeeMugs = List.of(coffeeMug0);
-        coffeeMugs.forEach(coffeeMug -> coffeeMug.setCategoryId(savedCoffeeMugsCategory.getId()));
+        var coffeeMug1 = Product.builder()
+                .name("Coffee Mug - Cherokee")
+                .description("Do you love mathematics? If so, then you need this elegant coffee mug with an amazing" +
+                        " fractal design. You don\\'t have to worry about boring coffee mugs anymore. This coffee mug" +
+                        " will be the topic of conversation in the office, guaranteed! Buy it now!")
+                .imageUrl("assets/images/products/coffeemugs/coffeemug-1001.png")
+                .price(16.44)
+                .build();
+
+        var coffeeMug2 = Product.builder()
+                .name("Coffee Mug - Sweeper")
+                .description("Do you love mathematics? If so, then you need this elegant coffee mug with an amazing" +
+                        " fractal design. You don\\'t have to worry about boring coffee mugs anymore. This coffee mug" +
+                        " will be the topic of conversation in the office, guaranteed! Buy it now!")
+                .imageUrl("assets/images/products/coffeemugs/coffeemug-1002.png")
+                .price(34.99)
+                .build();
+
+        var coffeeMug3 = Product.builder()
+                .name("Coffee Mug - Aspire")
+                .description("Do you love mathematics? If so, then you need this elegant coffee mug with an amazing" +
+                        " fractal design. You don\\'t have to worry about boring coffee mugs anymore. This coffee mug" +
+                        " will be the topic of conversation in the office, guaranteed! Buy it now!")
+                .imageUrl("assets/images/products/coffeemugs/coffeemug-1003.png")
+                .price(17.49)
+                .build();
+
+        var coffeeMug4 = Product.builder()
+                .name("Coffee Mug - Dorian")
+                .description("Do you love mathematics? If so, then you need this elegant coffee mug with an amazing" +
+                        " fractal design. You don\\'t have to worry about boring coffee mugs anymore. This coffee mug" +
+                        " will be the topic of conversation in the office, guaranteed! Buy it now!")
+                .imageUrl("assets/images/products/coffeemugs/coffeemug-1004.png")
+                .price(20.99)
+                .build();
+
+        var coffeeMug5 = Product.builder()
+                .name("Coffee Mug - Columbia")
+                .description("Do you love mathematics? If so, then you need this elegant coffee mug with an amazing" +
+                        " fractal design. You don\\'t have to worry about boring coffee mugs anymore. This coffee mug" +
+                        " will be the topic of conversation in the office, guaranteed! Buy it now!")
+                .imageUrl("assets/images/products/coffeemugs/coffeemug-1005.png")
+                .price(19.99)
+                .build();
+
+        var coffeeMug6 = Product.builder()
+                .name("Coffee Mug - Worthing")
+                .description("Do you love mathematics? If so, then you need this elegant coffee mug with an amazing" +
+                        " fractal design. You don\\'t have to worry about boring coffee mugs anymore. This coffee mug" +
+                        " will be the topic of conversation in the office, guaranteed! Buy it now!")
+                .imageUrl("assets/images/products/coffeemugs/coffeemug-1006.png")
+                .price(21.99)
+                .build();
+
+        var coffeeMug7 = Product.builder()
+                .name("Coffee Mug - Oak Cliff")
+                .description("Do you love mathematics? If so, then you need this elegant coffee mug with an amazing" +
+                        " fractal design. You don\\'t have to worry about boring coffee mugs anymore. This coffee mug" +
+                        " will be the topic of conversation in the office, guaranteed! Buy it now!")
+                .imageUrl("assets/images/products/coffeemugs/coffeemug-1007.png")
+                .price(22.99)
+                .build();
+
+        var coffeeMug8 = Product.builder()
+                .name("Coffee Mug - Tachyon")
+                .description("Do you love mathematics? If so, then you need this elegant coffee mug with an amazing" +
+                        " fractal design. You don\\'t have to worry about boring coffee mugs anymore. This coffee mug" +
+                        " will be the topic of conversation in the office, guaranteed! Buy it now!")
+                .imageUrl("assets/images/products/coffeemugs/coffeemug-1008.png")
+                .price(21.99)
+                .build();
+
+        var coffeeMug9 = Product.builder()
+                .name("Coffee Mug - Pan")
+                .description("Do you love mathematics? If so, then you need this elegant coffee mug with an amazing" +
+                        " fractal design. You don\\'t have to worry about boring coffee mugs anymore. This coffee mug" +
+                        " will be the topic of conversation in the office, guaranteed! Buy it now!")
+                .imageUrl("assets/images/products/coffeemugs/coffeemug-1009.png")
+                .price(13.99)
+                .build();
+
+        var coffeeMug10 = Product.builder()
+                .name("Coffee Mug - Phase")
+                .description("Do you love mathematics? If so, then you need this elegant coffee mug with an amazing" +
+                        " fractal design. You don\\'t have to worry about boring coffee mugs anymore. This coffee mug" +
+                        " will be the topic of conversation in the office, guaranteed! Buy it now!")
+                .imageUrl("assets/images/products/coffeemugs/coffeemug-1010.png")
+                .price(21.99)
+                .build();
+
+        var coffeeMug11 = Product.builder()
+                .name("Coffee Mug - Falling")
+                .description("Do you love mathematics? If so, then you need this elegant coffee mug with an amazing" +
+                        " fractal design. You don\\'t have to worry about boring coffee mugs anymore. This coffee mug" +
+                        " will be the topic of conversation in the office, guaranteed! Buy it now!")
+                .imageUrl("assets/images/products/coffeemugs/coffeemug-1011.png")
+                .price(24.99)
+                .build();
+
+        var coffeeMug12 = Product.builder()
+                .name("Coffee Mug - Wispy")
+                .description("Do you love mathematics? If so, then you need this elegant coffee mug with an amazing" +
+                        " fractal design. You don\\'t have to worry about boring coffee mugs anymore. This coffee mug" +
+                        " will be the topic of conversation in the office, guaranteed! Buy it now!")
+                .imageUrl("assets/images/products/coffeemugs/coffeemug-1012.png")
+                .price(21.99)
+                .build();
+
+        var coffeeMug13 = Product.builder()
+                .name("Coffee Mug - Arlington")
+                .description("Do you love mathematics? If so, then you need this elegant coffee mug with an amazing" +
+                        " fractal design. You don\\'t have to worry about boring coffee mugs anymore. This coffee mug" +
+                        " will be the topic of conversation in the office, guaranteed! Buy it now!")
+                .imageUrl("assets/images/products/coffeemugs/coffeemug-1006.png")
+                .price(22.99)
+                .build();
+
+        var coffeeMug14 = Product.builder()
+                .name("Coffee Mug - Gazing")
+                .description("Do you love mathematics? If so, then you need this elegant coffee mug with an amazing" +
+                        " fractal design. You don\\'t have to worry about boring coffee mugs anymore. This coffee mug" +
+                        " will be the topic of conversation in the office, guaranteed! Buy it now!")
+                .imageUrl("assets/images/products/coffeemugs/coffeemug-1014.png")
+                .price(21.99)
+                .build();
+
+        var coffeeMug15 = Product.builder()
+                .name("Coffee Mug - Recursion")
+                .description("Do you love mathematics? If so, then you need this elegant coffee mug with an amazing" +
+                        " fractal design. You don\\'t have to worry about boring coffee mugs anymore. This coffee mug" +
+                        " will be the topic of conversation in the office, guaranteed! Buy it now!")
+                .imageUrl("assets/images/products/coffeemugs/coffeemug-1015.png")
+                .price(30.99)
+                .build();
+
+        var coffeeMug16 = Product.builder()
+                .name("Coffee Mug - Azura")
+                .description("Do you love mathematics? If so, then you need this elegant coffee mug with an amazing" +
+                        " fractal design. You don\\'t have to worry about boring coffee mugs anymore. This coffee mug" +
+                        " will be the topic of conversation in the office, guaranteed! Buy it now!")
+                .imageUrl("assets/images/products/coffeemugs/coffeemug-1016.png")
+                .price(21.99)
+                .build();
+
+        var coffeeMug17 = Product.builder()
+                .name("Coffee Mug - Quantum Leap")
+                .description("Do you love mathematics? If so, then you need this elegant coffee mug with an amazing" +
+                        " fractal design. You don\\'t have to worry about boring coffee mugs anymore. This coffee mug" +
+                        " will be the topic of conversation in the office, guaranteed! Buy it now!")
+                .imageUrl("assets/images/products/coffeemugs/coffeemug-1017.png")
+                .price(11.99)
+                .build();
+
+        var coffeeMug18 = Product.builder()
+                .name("Coffee Mug - Treasure")
+                .description("Do you love mathematics? If so, then you need this elegant coffee mug with an amazing" +
+                        " fractal design. You don\\'t have to worry about boring coffee mugs anymore. This coffee mug" +
+                        " will be the topic of conversation in the office, guaranteed! Buy it now!")
+                .imageUrl("assets/images/products/coffeemugs/coffeemug-1018.png")
+                .price(29.99)
+                .build();
+
+        var coffeeMug19 = Product.builder()
+                .name("Coffee Mug - Light Years")
+                .description("Do you love mathematics? If so, then you need this elegant coffee mug with an amazing" +
+                        " fractal design. You don\\'t have to worry about boring coffee mugs anymore. This coffee mug" +
+                        " will be the topic of conversation in the office, guaranteed! Buy it now!")
+                .imageUrl("assets/images/products/coffeemugs/coffeemug-1019.png")
+                .price(21.99)
+                .build();
+
+        var coffeeMug20 = Product.builder()
+                .name("Coffee Mug - Taylor")
+                .description("Do you love mathematics? If so, then you need this elegant coffee mug with an amazing" +
+                        " fractal design. You don\\'t have to worry about boring coffee mugs anymore. This coffee mug" +
+                        " will be the topic of conversation in the office, guaranteed! Buy it now!")
+                .imageUrl("assets/images/products/coffeemugs/coffeemug-1020.png")
+                .price(25.99)
+                .build();
+
+        var coffeeMug21 = Product.builder()
+                .name("Coffee Mug - Gracia")
+                .description("Do you love mathematics? If so, then you need this elegant coffee mug with an amazing" +
+                        " fractal design. You don\\'t have to worry about boring coffee mugs anymore. This coffee mug" +
+                        " will be the topic of conversation in the office, guaranteed! Buy it now!")
+                .imageUrl("assets/images/products/coffeemugs/coffeemug-1021.png")
+                .price(13.99)
+                .build();
+
+        var coffeeMug22 = Product.builder()
+                .name("Coffee Mug - Relax")
+                .description("Do you love mathematics? If so, then you need this elegant coffee mug with an amazing" +
+                        " fractal design. You don\\'t have to worry about boring coffee mugs anymore. This coffee mug" +
+                        " will be the topic of conversation in the office, guaranteed! Buy it now!")
+                .imageUrl("assets/images/products/coffeemugs/coffeemug-1022.png")
+                .price(22.99)
+                .build();
+
+        var coffeeMug23 = Product.builder()
+                .name("Coffee Mug - Windermere")
+                .description("Do you love mathematics? If so, then you need this elegant coffee mug with an amazing" +
+                        " fractal design. You don\\'t have to worry about boring coffee mugs anymore. This coffee mug" +
+                        " will be the topic of conversation in the office, guaranteed! Buy it now!")
+                .imageUrl("assets/images/products/coffeemugs/coffeemug-1023.png")
+                .price(21.99)
+                .build();
+
+        var coffeeMug24 = Product.builder()
+                .name("Coffee Mug - Prancer")
+                .description("Do you love mathematics? If so, then you need this elegant coffee mug with an amazing" +
+                        " fractal design. You don\\'t have to worry about boring coffee mugs anymore. This coffee mug" +
+                        " will be the topic of conversation in the office, guaranteed! Buy it now!")
+                .imageUrl("assets/images/products/coffeemugs/coffeemug-1024.png")
+                .price(21.99)
+                .build();
+
+        var coffeeMugs = List.of(
+                coffeeMug0, coffeeMug1, coffeeMug2, coffeeMug3, coffeeMug4,
+                coffeeMug5, coffeeMug6, coffeeMug7, coffeeMug8, coffeeMug9,
+                coffeeMug10, coffeeMug11, coffeeMug12, coffeeMug13, coffeeMug14,
+                coffeeMug15, coffeeMug16, coffeeMug17, coffeeMug18, coffeeMug19,
+                coffeeMug20, coffeeMug21, coffeeMug22, coffeeMug23, coffeeMug24);
+
+        coffeeMugs.forEach(coffeeMug -> {
+            coffeeMug.setCategoryId(savedCoffeeMugsCategory.getId());
+            coffeeMug.setId(UUID.randomUUID().toString());
+        });
         db.insert(coffeeMugs, Product.class);
     }
 

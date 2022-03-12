@@ -4,7 +4,7 @@ spring:
       uri: mongodb://localhost:27017/test
 
 mongock:
-  change-logs-scan-package: com.socket.productservice.repository.changelog
+  change-logs-scan-package: com.lenovo.productservice.repository.changelog
 
 logging:
   level:
@@ -19,6 +19,9 @@ springdoc:
 
 application:
   web-security-config:
-    custom-unsecured-endpoints: /products/**, /categories
+    custom-unsecured-endpoints: /products/**, /reviews/product/*
+
+account-service:
+  url: http://localhost:8094
 
 
