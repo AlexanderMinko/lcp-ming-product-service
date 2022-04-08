@@ -2,6 +2,7 @@ package com.lenovo.productservice.controller;
 
 import com.lenovo.productservice.entity.Category;
 import com.lenovo.productservice.entity.Product;
+import com.lenovo.productservice.entity.dto.ProductResponseDto;
 import com.lenovo.productservice.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -36,7 +37,7 @@ public class ProductController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<Product>> getProducts(@RequestParam Integer page, @RequestParam Integer size) {
+    public ResponseEntity<Page<ProductResponseDto>> getProducts(@RequestParam Integer page, @RequestParam Integer size) {
         return new ResponseEntity<>(productService.getProducts(page, size), HttpStatus.OK);
     }
 

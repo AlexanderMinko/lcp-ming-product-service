@@ -14,12 +14,15 @@ logging:
 server:
   port: 8090
 
-springdoc:
-  version: 1.0
+swagger:
+  api:
+    title: Product Service API
+    description: Product Service Description
+    version: 1.0
 
 application:
   web-security-config:
-    custom-unsecured-endpoints: /products/**, /reviews/product/*
+#    custom-unsecured-endpoints: /products/**, /reviews/product/*, /cart
 
 account-service:
   url: http://localhost:8094

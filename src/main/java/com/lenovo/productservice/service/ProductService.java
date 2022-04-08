@@ -1,13 +1,17 @@
 package com.lenovo.productservice.service;
 
 import com.lenovo.exception.ProductNotFound;
+import com.lenovo.productservice.entity.Producer;
 import com.lenovo.productservice.entity.Product;
+import com.lenovo.productservice.entity.dto.ProductResponseDto;
 import com.lenovo.productservice.repository.CategoryRepository;
+import com.lenovo.productservice.repository.ProducerRepository;
 import com.lenovo.productservice.repository.ProductRepository;
 import com.lenovo.productservice.entity.Category;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -15,6 +19,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -23,6 +29,7 @@ public class ProductService {
 
     private final ProductRepository productRepository;
     private final CategoryRepository categoryRepository;
+    private final ProducerRepository producerRepository;
 
     @Transactional(readOnly = true)
     public List<Product> getList() {
@@ -30,11 +37,12 @@ public class ProductService {
     }
 
     @Transactional(readOnly = true)
-    public Page<Product> getProducts(Integer page, Integer size) {
-        PageRequest pageRequest = PageRequest.of(pageMinus(page), size);
-        Page<Product> products = productRepository.findAll(pageRequest);
+    public Page<ProductResponseDto> getProducts(Integer page, Integer size) {
+        var pageRequest = PageRequest.of(pageMinus(page), size);
+        var products = productRepository.findAll(pageRequest);
+        var converted = products.stream().map(this::convertFromProductToDto).collect(Collectors.toList());
         log.debug("{} products found, page: {}, size: {}", products.getTotalElements(), page, size);
-        return products;
+        return new PageImpl<>(converted, pageRequest, products.getTotalElements());
     }
 
     @Transactional(readOnly = true)
@@ -90,6 +98,7 @@ public class ProductService {
     public Page<Product> getProductsByNameSorted(Integer page, Integer size) {
         PageRequest pageRequest = PageRequest.of(pageMinus(page), size, Sort.by(Sort.Direction.ASC, "name"));
         Page<Product> products = productRepository.findAll(pageRequest);
+
         log.debug("{} products found, page: {}, size: {}", products.getTotalElements(), page, size);
         return products;
     }
@@ -101,6 +110,17 @@ public class ProductService {
     //Spring data numbered pages from 0, and this method make page numbering from one
     private Integer pageMinus(Integer page) {
         return page > 0 ? --page : 0;
+    }
+
+    private ProductResponseDto convertFromProductToDto(Product product) {
+        var producerId = product.getProducerId();
+        var categoryId = product.getCategoryId();
+        var producer = producerRepository.findById(producerId)
+                .orElseThrow(() -> new RuntimeException("Producer not fount with id: " + producerId));
+        var category = categoryRepository.findById(categoryId)
+                .orElseThrow(() -> new RuntimeException("Category not fount for id: " + categoryId));
+
+        return new ProductResponseDto(product, category, producer);
     }
 
 }

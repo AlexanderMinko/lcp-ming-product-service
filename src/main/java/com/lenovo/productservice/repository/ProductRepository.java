@@ -8,11 +8,9 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.Collection;
 import java.util.List;
 
-public interface ProductRepository extends MongoRepository<Product, String> {
+public interface ProductRepository extends MongoRepository<Product, String>, ProductRepositoryCustom {
 
     Page<Product> findByCategoryId(String id, Pageable pageable);
-
-    Page<Product> findByNameContains(String name, Pageable pageable);
 
     List<Product> findProductByIdIn(Collection<String> id);
 }

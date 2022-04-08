@@ -4,10 +4,17 @@ import com.github.cloudyrock.mongock.ChangeLog;
 import com.github.cloudyrock.mongock.ChangeSet;
 import com.github.cloudyrock.mongock.driver.mongodb.springdata.v3.decorator.impl.MongockTemplate;
 import com.lenovo.productservice.entity.Category;
+import com.lenovo.productservice.entity.Producer;
 import com.lenovo.productservice.entity.Product;
 
 import java.util.List;
 import java.util.UUID;
+
+import static com.mongodb.client.model.Filters.and;
+import static com.mongodb.client.model.Filters.empty;
+import static com.mongodb.client.model.Filters.eq;
+import static com.mongodb.client.model.Filters.exists;
+import static com.mongodb.client.model.Updates.set;
 
 @ChangeLog
 public class MongoChangeLog {
@@ -15,7 +22,7 @@ public class MongoChangeLog {
     @ChangeSet(order = "001", id="initBooks", author = "ming")
     public void initBooks(MongockTemplate db) {
         var books = Category.builder()
-                .name("books")
+                .name("Books")
                 .count(25)
                 .build();
         var savedCategory = db.save(books);
@@ -245,9 +252,12 @@ public class MongoChangeLog {
                 .price(28.99)
                 .build();
 
-        var products = List.of(book0, book1, book2, book3, book4, book5, book6, book7, book8,
-                book9, book10, book11, book12, book13, book14, book15, book16, book17, book18, book19, book20,
-                book21, book22, book23, book24);
+        var products = List.of(
+                book0, book1, book2, book3, book4,
+                book5, book6, book7, book8, book9,
+                book10, book11, book12, book13, book14,
+                book15, book16, book17, book18, book19,
+                book20, book21, book22, book23, book24);
         products.forEach(book -> {
             book.setCategoryId(savedCategory.getId());
             book.setId(UUID.randomUUID().toString());
@@ -501,6 +511,16 @@ public class MongoChangeLog {
             coffeeMug.setId(UUID.randomUUID().toString());
         });
         db.insert(coffeeMugs, Product.class);
+    }
+
+    @ChangeSet(order = "003", id="initProducer", author = "ming")
+    public void initProducer(MongockTemplate db) {
+        var producerId = UUID.randomUUID().toString();
+        var producer = new Producer(producerId, "Socket");
+        db.save(producer);
+        var productCollection = db.getCollection("product");
+        var updateQuery = set("producerId", producerId);
+        productCollection.updateMany(empty(), updateQuery);
     }
 
 }
