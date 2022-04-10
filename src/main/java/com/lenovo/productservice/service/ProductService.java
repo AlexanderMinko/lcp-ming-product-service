@@ -1,7 +1,6 @@
 package com.lenovo.productservice.service;
 
 import com.lenovo.exception.ProductNotFound;
-import com.lenovo.productservice.entity.Producer;
 import com.lenovo.productservice.entity.Product;
 import com.lenovo.productservice.entity.dto.ProductResponseDto;
 import com.lenovo.productservice.repository.CategoryRepository;
@@ -10,16 +9,15 @@ import com.lenovo.productservice.repository.ProductRepository;
 import com.lenovo.productservice.entity.Category;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Set;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,85 +29,38 @@ public class ProductService {
     private final CategoryRepository categoryRepository;
     private final ProducerRepository producerRepository;
 
-    @Transactional(readOnly = true)
     public List<Product> getList() {
         return productRepository.findAll();
     }
 
-    @Transactional(readOnly = true)
-    public Page<ProductResponseDto> getProducts(Integer page, Integer size) {
-        var pageRequest = PageRequest.of(pageMinus(page), size);
-        var products = productRepository.findAll(pageRequest);
+    public Page<ProductResponseDto> getProducts(String freeText, String categoryId, String producerId, Pageable pageable) {
+        var products = findBySearchParams(freeText, categoryId, producerId, pageable);
         var converted = products.stream().map(this::convertFromProductToDto).collect(Collectors.toList());
-        log.debug("{} products found, page: {}, size: {}", products.getTotalElements(), page, size);
-        return new PageImpl<>(converted, pageRequest, products.getTotalElements());
+        log.debug("{} products found, page: {}, size: {}", products.getTotalElements(), pageable.getPageNumber(), pageable.getPageSize());
+        return new PageImpl<>(converted, pageable, products.getTotalElements());
     }
 
-    @Transactional(readOnly = true)
+    private Page<Product> findBySearchParams(String freeText, String categoryId, String producerId, Pageable pageable) {
+        return StringUtils.isAllEmpty(freeText, categoryId, producerId)
+                ? productRepository.findAll(pageable)
+                : productRepository.findBySearchParams(freeText, categoryId, producerId, pageable);
+
+    }
+
     public List<Category> getCategories() {
         List<Category> categories = categoryRepository.findAll();
         log.debug("{} categories found", categories.size());
         return categories;
     }
 
-    @Transactional(readOnly = true)
-    public Page<Product> getProductsByCategoryId(String id, Integer page, Integer size) {
-        PageRequest pageRequest = PageRequest.of(pageMinus(page), size);
-        Page<Product> products = productRepository.findByCategoryId(id, pageRequest);
-        log.debug("{} products found, by category id: {}, page: {}, size: {} ", products.getTotalElements(), id, page, size);
-        return products;
-    }
-
-    @Transactional(readOnly = true)
-    public Page<Product> getProductsByNameContaining(String name, Integer page, Integer size) {
-        PageRequest pageRequest = PageRequest.of(pageMinus(page), size);
-        Page<Product> products = productRepository.findByNameContains(name, pageRequest);
-        log.debug("In getProductsByNameContaining - {} products found, with name containing: {}", products.getTotalElements(), name);
-        return products;
-    }
-
-    @Transactional(readOnly = true)
     public Product getProductById(String id) {
         Product product = productRepository.findById(id).orElseThrow(() -> new ProductNotFound("product not found with id - " + id));
         log.debug("In getProductById - product: {} found", product);
         return product;
-
     }
 
-    @Transactional(readOnly = true)
-    public Page<Product> getProductsSortedByPriceAsc(Integer page, Integer size) {
-        PageRequest pageRequest = PageRequest
-                .of(pageMinus(page), size, Sort.by(Sort.Direction.ASC, "price"));
-        Page<Product> products = productRepository.findAll(pageRequest);
-        log.debug("{} products found, page: {}, size: {}", products.getTotalElements(), page, size);
-        return products;
-    }
-
-    @Transactional(readOnly = true)
-    public Page<Product> getProductsSortedByPriceDesc(Integer page, Integer size) {
-        PageRequest pageRequest = PageRequest
-                .of(pageMinus(page), size, Sort.by(Sort.Direction.DESC, "price"));
-        Page<Product> products = productRepository.findAll(pageRequest);
-        log.debug("{} products found, page: {}, size: {}", products.getTotalElements(), page, size);
-        return products;
-    }
-
-    @Transactional(readOnly = true)
-    public Page<Product> getProductsByNameSorted(Integer page, Integer size) {
-        PageRequest pageRequest = PageRequest.of(pageMinus(page), size, Sort.by(Sort.Direction.ASC, "name"));
-        Page<Product> products = productRepository.findAll(pageRequest);
-
-        log.debug("{} products found, page: {}, size: {}", products.getTotalElements(), page, size);
-        return products;
-    }
-
-    public List<Product> getProductsByIds(Set<String> ids) {
-        return productRepository.findProductByIdIn(ids);
-    }
-
-    //Spring data numbered pages from 0, and this method make page numbering from one
-    private Integer pageMinus(Integer page) {
-        return page > 0 ? --page : 0;
+    public List<Product> getProducts(Set<String> ids) {
+        return CollectionUtils.isEmpty(ids) ? productRepository.findAll() : productRepository.findProductByIdIn(ids);
     }
 
     private ProductResponseDto convertFromProductToDto(Product product) {
@@ -119,7 +70,6 @@ public class ProductService {
                 .orElseThrow(() -> new RuntimeException("Producer not fount with id: " + producerId));
         var category = categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new RuntimeException("Category not fount for id: " + categoryId));
-
         return new ProductResponseDto(product, category, producer);
     }
 

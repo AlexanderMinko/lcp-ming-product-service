@@ -10,10 +10,7 @@ import com.lenovo.productservice.entity.Product;
 import java.util.List;
 import java.util.UUID;
 
-import static com.mongodb.client.model.Filters.and;
 import static com.mongodb.client.model.Filters.empty;
-import static com.mongodb.client.model.Filters.eq;
-import static com.mongodb.client.model.Filters.exists;
 import static com.mongodb.client.model.Updates.set;
 
 @ChangeLog

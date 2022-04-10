@@ -22,7 +22,7 @@ swagger:
 
 application:
   web-security-config:
-#    custom-unsecured-endpoints: /products/**, /reviews/product/*, /cart
+    custom-unsecured-endpoints: /products/**, /reviews/product/*, /cart
 
 account-service:
   url: http://localhost:8094

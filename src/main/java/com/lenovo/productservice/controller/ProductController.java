@@ -4,8 +4,12 @@ import com.lenovo.productservice.entity.Category;
 import com.lenovo.productservice.entity.Product;
 import com.lenovo.productservice.entity.dto.ProductResponseDto;
 import com.lenovo.productservice.service.ProductService;
+import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
+import org.springdoc.core.converters.models.PageableAsQueryParam;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,28 +37,17 @@ public class ProductController {
 
     @PostMapping("/by-ids")
     public ResponseEntity<List<Product>> getProductsByIds(@RequestBody Set<String> ids) {
-        return ResponseEntity.ok(productService.getProductsByIds(ids));
+        return ResponseEntity.ok(productService.getProducts(ids));
     }
 
     @GetMapping
-    public ResponseEntity<Page<ProductResponseDto>> getProducts(@RequestParam Integer page, @RequestParam Integer size) {
-        return new ResponseEntity<>(productService.getProducts(page, size), HttpStatus.OK);
-    }
-
-    @GetMapping("/categories")
-    public ResponseEntity<List<Category>> getCategories() {
-        return new ResponseEntity<>(productService.getCategories(), HttpStatus.OK);
-    }
-
-    @GetMapping("/by-category")
-    public ResponseEntity<Page<Product>> getProductsByCategoryId(@RequestParam String id, @RequestParam Integer page, @RequestParam Integer size) {
-        return new ResponseEntity<>(productService.getProductsByCategoryId(id, page, size), HttpStatus.OK);
-    }
-
-    @GetMapping("/search")
-    public ResponseEntity<Page<Product>> getProductsByNameContaining(
-            @RequestParam String name, @RequestParam Integer page, @RequestParam Integer size) {
-        return new ResponseEntity<>(productService.getProductsByNameContaining(name, page, size), HttpStatus.OK);
+    @PageableAsQueryParam
+    public ResponseEntity<Page<ProductResponseDto>> getProducts(
+            @Parameter(hidden = true) @PageableDefault(size = 20, sort = {"name"}) Pageable pageable,
+            @RequestParam(name = "category_id", required = false) String categoryId,
+            @RequestParam(name = "producer_id", required = false) String producerId,
+            @RequestParam(name = "free_text", required = false) String freeText) {
+        return new ResponseEntity<>(productService.getProducts(freeText, categoryId, producerId, pageable), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
@@ -62,19 +55,9 @@ public class ProductController {
         return new ResponseEntity<>(productService.getProductById(id), HttpStatus.OK);
     }
 
-    @GetMapping("/by-price-asc")
-    public ResponseEntity<Page<Product>> getProductsSorterByPriceAsc(@RequestParam Integer page, @RequestParam Integer size) {
-        return new ResponseEntity<>(productService.getProductsSortedByPriceAsc(page, size), HttpStatus.OK);
-    }
-
-    @GetMapping("/by-price-desc")
-    public ResponseEntity<Page<Product>> getProductsSorterByPriceDesc(@RequestParam Integer page, @RequestParam Integer size) {
-        return new ResponseEntity<>(productService.getProductsSortedByPriceDesc(page, size), HttpStatus.OK);
-    }
-
-    @GetMapping("/by-name")
-    public ResponseEntity<Page<Product>> getProductsByNameSorted(@RequestParam Integer page, @RequestParam Integer size) {
-        return new ResponseEntity<>(productService.getProductsByNameSorted(page, size), HttpStatus.OK);
+    @GetMapping("/categories")
+    public ResponseEntity<List<Category>> getCategories() {
+        return new ResponseEntity<>(productService.getCategories(), HttpStatus.OK);
     }
 
 }
