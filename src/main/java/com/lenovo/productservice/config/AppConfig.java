@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Configuration;
 @Data
 public class AppConfig {
 
-    @Value("${account-service.url}")
-    private String accountServiceUrl;
-
+  @Value("${account-service.url}")
+  private String accountServiceUrl;
 }

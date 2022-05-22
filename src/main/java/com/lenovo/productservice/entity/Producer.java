@@ -12,8 +12,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class Producer {
 
-    @Id
-    private String id;
-    private String name;
-
+  @Id
+  private String id;
+  private String name;
 }

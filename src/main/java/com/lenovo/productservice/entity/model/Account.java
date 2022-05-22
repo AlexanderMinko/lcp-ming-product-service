@@ -11,11 +11,10 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Account {
 
-    private String id;
-    private String userName;
-    private String email;
-    private String firstName;
-    private String lastName;
-    private String photoUrl;
-
+  private String id;
+  private String userName;
+  private String email;
+  private String firstName;
+  private String lastName;
+  private String photoUrl;
 }

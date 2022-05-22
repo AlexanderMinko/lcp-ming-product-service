@@ -1,10 +1,9 @@
 package com.lenovo.productservice.mapper;
 
-import com.github.marlonlom.utilities.timeago.TimeAgo;
 import com.lenovo.productservice.entity.Review;
-import com.lenovo.productservice.entity.dto.ReviewResponseDto;
+
+import com.github.marlonlom.utilities.timeago.TimeAgo;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface ReviewMapper {
@@ -15,7 +14,7 @@ public interface ReviewMapper {
 //    @Mapping(target = "reviewerPhotoUrl", expression = "java(review.getAccount().getPhotoUrl())")
 //    ReviewResponseDto mapFromReviewToReviewResponseDto(Review review);
 
-    default String getDuration(Review review) {
-        return TimeAgo.using(review.getCreatedDate().toEpochMilli());
-    }
+  default String getDuration(Review review) {
+    return TimeAgo.using(review.getCreatedDate().toEpochMilli());
+  }
 }

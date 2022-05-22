@@ -14,13 +14,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class Product {
 
-    @Id
-    private String id;
-    private String name;
-    private String description;
-    private String imageUrl;
-    private Double price;
-    private String categoryId;
-    private String producerId;
-
+  @Id
+  private String id;
+  private String name;
+  private String description;
+  private String imageUrl;
+  private Double price;
+  private String categoryId;
+  private String producerId;
 }
