@@ -4,8 +4,10 @@ import java.util.List;
 import java.util.Set;
 
 import com.lenovo.productservice.entity.Category;
+import com.lenovo.productservice.entity.Producer;
 import com.lenovo.productservice.entity.Product;
 import com.lenovo.productservice.entity.dto.ProductResponseDto;
+import com.lenovo.productservice.entity.param.CreateProductParam;
 import com.lenovo.productservice.service.ProductService;
 
 import io.swagger.v3.oas.annotations.Parameter;
@@ -22,7 +24,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequiredArgsConstructor
@@ -51,6 +55,14 @@ public class ProductController {
     return new ResponseEntity<>(productService.getProducts(freeText, categoryId, producerId, pageable), HttpStatus.OK);
   }
 
+  @PostMapping
+  public ResponseEntity<Void> createProduct(
+      @RequestPart("createParamJson") CreateProductParam createProductParam,
+      @RequestPart("imageFile") MultipartFile multipartRequest) {
+    productService.createProduct(createProductParam, multipartRequest);
+    return new ResponseEntity<>(HttpStatus.CREATED);
+  }
+
   @GetMapping("/{id}")
   public ResponseEntity<Product> getProductById(@PathVariable String id) {
     return new ResponseEntity<>(productService.getProductById(id), HttpStatus.OK);
@@ -60,4 +72,10 @@ public class ProductController {
   public ResponseEntity<List<Category>> getCategories() {
     return new ResponseEntity<>(productService.getCategories(), HttpStatus.OK);
   }
+
+  @GetMapping("/producers")
+  public ResponseEntity<List<Producer>> getProducers() {
+    return new ResponseEntity<>(productService.getProducers(), HttpStatus.OK);
+  }
+
 }

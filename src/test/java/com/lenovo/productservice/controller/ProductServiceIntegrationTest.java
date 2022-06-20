@@ -5,22 +5,20 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import com.lenovo.productservice.entity.Product;
 import com.lenovo.productservice.repository.ProductRepository;
+import com.lenovo.test.InjectJwt;
+import com.lenovo.test.IntegrationTest;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-@SpringBootTest(
-    webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
-    properties = {
-        "mongock.enabled=false"
-    })
+@IntegrationTest
+@InjectJwt
 public class ProductServiceIntegrationTest {
 
   @Autowired
@@ -29,7 +27,7 @@ public class ProductServiceIntegrationTest {
   @Autowired
   private ProductRepository productRepository;
 
-  private ObjectMapper mapper = new ObjectMapper();
+  private static final ObjectMapper MAPPER = new ObjectMapper();
   private static final String UUID1 = UUID.randomUUID().toString();
   private static final String UUID2 = UUID.randomUUID().toString();
   private static final String UUID3 = UUID.randomUUID().toString();
@@ -49,7 +47,7 @@ public class ProductServiceIntegrationTest {
         .expectStatus()
         .isOk()
         .expectBody()
-        .json(mapper.writeValueAsString(stubProducts()));
+        .json(MAPPER.writeValueAsString(stubProducts()));
   }
 
   @Test
@@ -67,7 +65,7 @@ public class ProductServiceIntegrationTest {
         .expectStatus()
         .isOk()
         .expectBody()
-        .json(mapper.writeValueAsString(expected));
+        .json(MAPPER.writeValueAsString(expected));
   }
 
   private List<Product> stubProducts() {
@@ -75,20 +73,20 @@ public class ProductServiceIntegrationTest {
         .id(UUID1)
         .name("Crash Course in Python")
         .description("Learn Python at your own pace")
-        .imageUrl("assets/images/products/books/book-1000.png")
+        .imageUrl("/images/products/books/book-1000.png")
         .price(14.99)
         .build();
     var product2 = Product.builder()
         .id(UUID2)
         .name("Become a Guru in JavaScript")
         .description("Learn JavaScript at your own pace.")
-        .imageUrl("assets/images/products/books/book-1001.png")
+        .imageUrl("/images/products/books/book-1001.png")
         .price(20.99).build();
     var product3 = Product.builder()
         .id(UUID3)
         .name("Exploring Vue.js")
         .description("Learn Vue.js at your own pace")
-        .imageUrl("assets/images/products/books/book-1002.png")
+        .imageUrl("/images/products/books/book-1002.png")
         .price(13.99)
         .build();
     return List.of(product1, product2, product3);

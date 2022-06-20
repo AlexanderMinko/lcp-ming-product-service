@@ -20,7 +20,9 @@ public class MongoChangeLog {
   @ChangeSet(order = "001", id = "initBooks", author = "ming")
   public void initBooks(MongockTemplate db) {
     var books = Category.builder()
-        .name("Books")
+        .id(UUID.randomUUID().toString())
+        .displayName("Books")
+        .name("books")
         .count(25)
         .build();
     var savedCategory = db.save(books);
@@ -30,7 +32,7 @@ public class MongoChangeLog {
         .description("Learn Python at your own pace. The author explains how the technology works in" +
             " easy-to-understand language. This book includes working examples that you can apply to" +
             " your own projects. Purchase the book and get started today!")
-        .imageUrl("assets/images/products/books/book-1000.png")
+        .imageUrl("/images/products/books/book-1000.png")
         .price(14.99)
         .build();
 
@@ -39,7 +41,7 @@ public class MongoChangeLog {
         .description("Learn JavaScript at your own pace. The author explains how the technology works in" +
             " easy-to-understand language. This book includes working examples that you can apply to " +
             "your own projects. Purchase the book and get started today!")
-        .imageUrl("assets/images/products/books/book-1001.png")
+        .imageUrl("/images/products/books/book-1001.png")
         .price(20.99)
         .build();
 
@@ -48,7 +50,7 @@ public class MongoChangeLog {
         .description("Learn Vue.js at your own pace. The author explains how the technology works in" +
             " easy-to-understand language. This book includes working examples that you can apply to " +
             "your own projects. Purchase the book and get started today!")
-        .imageUrl("assets/images/products/books/book-1002.png")
+        .imageUrl("/images/products/books/book-1002.png")
         .price(13.99)
         .build();
 
@@ -57,7 +59,7 @@ public class MongoChangeLog {
         .description("Learn Big Data at your own pace. The author explains how the technology works in" +
             " easy-to-understand language. This book includes working examples that you can apply to " +
             "your own projects. Purchase the book and get started today!")
-        .imageUrl("assets/images/products/books/book-1003.png")
+        .imageUrl("/images/products/books/book-1003.png")
         .price(16.99)
         .build();
 
@@ -66,7 +68,7 @@ public class MongoChangeLog {
         .description("Learn Big Data at your own pace. The author explains how the technology works in" +
             " easy-to-understand language. This book includes working examples that you can apply to " +
             "your own projects. Purchase the book and get started today!")
-        .imageUrl("assets/images/products/books/book-1004.png")
+        .imageUrl("/images/products/books/book-1004.png")
         .price(19.99)
         .build();
 
@@ -75,7 +77,7 @@ public class MongoChangeLog {
         .description("Learn JavaScript at your own pace. The author explains how the technology works in" +
             " easy-to-understand language. This book includes working examples that you can apply to " +
             "your own projects. Purchase the book and get started today!")
-        .imageUrl("assets/images/products/books/book-1005.png")
+        .imageUrl("/images/products/books/book-1005.png")
         .price(15.99)
         .build();
 
@@ -84,7 +86,7 @@ public class MongoChangeLog {
         .description("Learn SQL at your own pace. The author explains how the technology works in" +
             " easy-to-understand language. This book includes working examples that you can apply to " +
             "your own projects. Purchase the book and get started today!")
-        .imageUrl("assets/images/products/books/book-1006.png")
+        .imageUrl("/images/products/books/book-1006.png")
         .price(15.99)
         .build();
 
@@ -93,7 +95,7 @@ public class MongoChangeLog {
         .description("Learn JavaScript at your own pace. The author explains how the technology works in" +
             " easy-to-understand language. This book includes working examples that you can apply to " +
             "your own projects. Purchase the book and get started today!")
-        .imageUrl("assets/images/products/books/book-1007.png")
+        .imageUrl("/images/products/books/book-1007.png")
         .price(15.99)
         .build();
 
@@ -102,7 +104,7 @@ public class MongoChangeLog {
         .description("Learn Spring Boot at your own pace. The author explains how the technology works in" +
             " easy-to-understand language. This book includes working examples that you can apply to " +
             "your own projects. Purchase the book and get started today!")
-        .imageUrl("assets/images/products/books/book-1008.png")
+        .imageUrl("/images/products/books/book-1008.png")
         .price(16.99)
         .build();
 
@@ -111,7 +113,7 @@ public class MongoChangeLog {
         .description("Learn React.js at your own pace. The author explains how the technology works in" +
             " easy-to-understand language. This book includes working examples that you can apply to " +
             "your own projects. Purchase the book and get started today!")
-        .imageUrl("assets/images/products/books/book-1009.png")
+        .imageUrl("/images/products/books/book-1009.png")
         .price(16.99)
         .build();
 
@@ -120,7 +122,7 @@ public class MongoChangeLog {
         .description("Learn Data Science at your own pace. The author explains how the technology works in" +
             " easy-to-understand language. This book includes working examples that you can apply to " +
             "your own projects. Purchase the book and get started today!")
-        .imageUrl("assets/images/products/books/book-1010.png")
+        .imageUrl("/images/products/books/book-1010.png")
         .price(19.99)
         .build();
 
@@ -129,7 +131,7 @@ public class MongoChangeLog {
         .description("Learn Java at your own pace. The author explains how the technology works in" +
             " easy-to-understand language. This book includes working examples that you can apply to " +
             "your own projects. Purchase the book and get started today!")
-        .imageUrl("assets/images/products/books/book-1011.png")
+        .imageUrl("/images/products/books/book-1011.png")
         .price(23.99)
         .build();
 
@@ -138,7 +140,7 @@ public class MongoChangeLog {
         .description("Learn DevOps at your own pace. The author explains how the technology works in" +
             " easy-to-understand language. This book includes working examples that you can apply to " +
             "your own projects. Purchase the book and get started today!")
-        .imageUrl("assets/images/products/books/book-1012.png")
+        .imageUrl("/images/products/books/book-1012.png")
         .price(22.99)
         .build();
 
@@ -147,7 +149,7 @@ public class MongoChangeLog {
         .description("Learn SQL at your own pace. The author explains how the technology works in" +
             " easy-to-understand language. This book includes working examples that you can apply to " +
             "your own projects. Purchase the book and get started today!")
-        .imageUrl("assets/images/products/books/book-1013.png")
+        .imageUrl("/images/products/books/book-1013.png")
         .price(11.99)
         .build();
 
@@ -156,7 +158,7 @@ public class MongoChangeLog {
         .description("Learn SQL at your own pace. The author explains how the technology works in" +
             " easy-to-understand language. This book includes working examples that you can apply to " +
             "your own projects. Purchase the book and get started today!")
-        .imageUrl("assets/images/products/books/book-1014.png")
+        .imageUrl("/images/products/books/book-1014.png")
         .price(18.99)
         .build();
 
@@ -165,7 +167,7 @@ public class MongoChangeLog {
         .description("Learn JavaScript at your own pace. The author explains how the technology works in" +
             " easy-to-understand language. This book includes working examples that you can apply to " +
             "your own projects. Purchase the book and get started today!")
-        .imageUrl("assets/images/products/books/book-1015.png")
+        .imageUrl("/images/products/books/book-1015.png")
         .price(14.99)
         .build();
 
@@ -174,7 +176,7 @@ public class MongoChangeLog {
         .description("Learn React.js at your own pace. The author explains how the technology works in" +
             " easy-to-understand language. This book includes working examples that you can apply to " +
             "your own projects. Purchase the book and get started today!")
-        .imageUrl("assets/images/products/books/book-1016.png")
+        .imageUrl("/images/products/books/book-1016.png")
         .price(29.99)
         .build();
 
@@ -183,7 +185,7 @@ public class MongoChangeLog {
         .description("Learn React.js at your own pace. The author explains how the technology works in" +
             " easy-to-understand language. This book includes working examples that you can apply to " +
             "your own projects. Purchase the book and get started today!")
-        .imageUrl("assets/images/products/books/book-1017.png")
+        .imageUrl("/images/products/books/book-1017.png")
         .price(32.99)
         .build();
 
@@ -192,7 +194,7 @@ public class MongoChangeLog {
         .description("Learn C# at your own pace. The author explains how the technology works in" +
             " easy-to-understand language. This book includes working examples that you can apply to " +
             "your own projects. Purchase the book and get started today!")
-        .imageUrl("assets/images/products/books/book-1018.png")
+        .imageUrl("/images/products/books/book-1018.png")
         .price(22.99)
         .build();
 
@@ -201,7 +203,7 @@ public class MongoChangeLog {
         .description("Learn JavaScript at your own pace. The author explains how the technology works in" +
             " easy-to-understand language. This book includes working examples that you can apply to " +
             "your own projects. Purchase the book and get started today!")
-        .imageUrl("assets/images/products/books/book-1019.png")
+        .imageUrl("/images/products/books/book-1019.png")
         .price(24.99)
         .build();
 
@@ -210,7 +212,7 @@ public class MongoChangeLog {
         .description("Learn Machine Learning at your own pace. The author explains how the technology works in" +
             " easy-to-understand language. This book includes working examples that you can apply to " +
             "your own projects. Purchase the book and get started today!")
-        .imageUrl("assets/images/products/books/book-1020.png")
+        .imageUrl("/images/products/books/book-1020.png")
         .price(9.99)
         .build();
 
@@ -219,7 +221,7 @@ public class MongoChangeLog {
         .description("Learn Java at your own pace. The author explains how the technology works in" +
             " easy-to-understand language. This book includes working examples that you can apply to " +
             "your own projects. Purchase the book and get started today!")
-        .imageUrl("assets/images/products/books/book-1021.png")
+        .imageUrl("/images/products/books/book-1021.png")
         .price(19.99)
         .build();
 
@@ -228,7 +230,7 @@ public class MongoChangeLog {
         .description("Learn Python at your own pace. The author explains how the technology works in" +
             " easy-to-understand language. This book includes working examples that you can apply to " +
             "your own projects. Purchase the book and get started today!")
-        .imageUrl("assets/images/products/books/book-1022.png")
+        .imageUrl("/images/products/books/book-1022.png")
         .price(23.99)
         .build();
 
@@ -237,7 +239,7 @@ public class MongoChangeLog {
         .description("Learn C# at your own pace. The author explains how the technology works in" +
             " easy-to-understand language. This book includes working examples that you can apply to " +
             "your own projects. Purchase the book and get started today!")
-        .imageUrl("assets/images/products/books/book-1023.png")
+        .imageUrl("/images/products/books/book-1023.png")
         .price(27.99)
         .build();
 
@@ -246,7 +248,7 @@ public class MongoChangeLog {
         .description("Learn Machine Learning at your own pace. The author explains how the technology works in" +
             " easy-to-understand language. This book includes working examples that you can apply to " +
             "your own projects. Purchase the book and get started today!")
-        .imageUrl("assets/images/products/books/book-1024.png")
+        .imageUrl("/images/products/books/book-1024.png")
         .price(28.99)
         .build();
 
@@ -266,7 +268,9 @@ public class MongoChangeLog {
   @ChangeSet(order = "002", id = "initCoffeeMugs", author = "ming")
   public void initCoffeeMugs(MongockTemplate db) {
     var coffeeMugsCategory = Category.builder()
-        .name("Coffee Mugs")
+        .id(UUID.randomUUID().toString())
+        .name("coffeemugs")
+        .displayName("Coffee Mugs")
         .count(25)
         .build();
 
@@ -277,7 +281,7 @@ public class MongoChangeLog {
         .description("Do you love mathematics? If so, then you need this elegant coffee mug with an amazing" +
             " fractal design. You don\\'t have to worry about boring coffee mugs anymore. This coffee mug" +
             " will be the topic of conversation in the office, guaranteed! Buy it now!")
-        .imageUrl("assets/images/products/coffeemugs/coffeemug-1000.png")
+        .imageUrl("/images/products/coffeemugs/coffeemug-1000.png")
         .price(18.99)
         .build();
 
@@ -286,7 +290,7 @@ public class MongoChangeLog {
         .description("Do you love mathematics? If so, then you need this elegant coffee mug with an amazing" +
             " fractal design. You don\\'t have to worry about boring coffee mugs anymore. This coffee mug" +
             " will be the topic of conversation in the office, guaranteed! Buy it now!")
-        .imageUrl("assets/images/products/coffeemugs/coffeemug-1001.png")
+        .imageUrl("/images/products/coffeemugs/coffeemug-1001.png")
         .price(16.44)
         .build();
 
@@ -295,7 +299,7 @@ public class MongoChangeLog {
         .description("Do you love mathematics? If so, then you need this elegant coffee mug with an amazing" +
             " fractal design. You don\\'t have to worry about boring coffee mugs anymore. This coffee mug" +
             " will be the topic of conversation in the office, guaranteed! Buy it now!")
-        .imageUrl("assets/images/products/coffeemugs/coffeemug-1002.png")
+        .imageUrl("/images/products/coffeemugs/coffeemug-1002.png")
         .price(34.99)
         .build();
 
@@ -304,7 +308,7 @@ public class MongoChangeLog {
         .description("Do you love mathematics? If so, then you need this elegant coffee mug with an amazing" +
             " fractal design. You don\\'t have to worry about boring coffee mugs anymore. This coffee mug" +
             " will be the topic of conversation in the office, guaranteed! Buy it now!")
-        .imageUrl("assets/images/products/coffeemugs/coffeemug-1003.png")
+        .imageUrl("/images/products/coffeemugs/coffeemug-1003.png")
         .price(17.49)
         .build();
 
@@ -313,7 +317,7 @@ public class MongoChangeLog {
         .description("Do you love mathematics? If so, then you need this elegant coffee mug with an amazing" +
             " fractal design. You don\\'t have to worry about boring coffee mugs anymore. This coffee mug" +
             " will be the topic of conversation in the office, guaranteed! Buy it now!")
-        .imageUrl("assets/images/products/coffeemugs/coffeemug-1004.png")
+        .imageUrl("/images/products/coffeemugs/coffeemug-1004.png")
         .price(20.99)
         .build();
 
@@ -322,7 +326,7 @@ public class MongoChangeLog {
         .description("Do you love mathematics? If so, then you need this elegant coffee mug with an amazing" +
             " fractal design. You don\\'t have to worry about boring coffee mugs anymore. This coffee mug" +
             " will be the topic of conversation in the office, guaranteed! Buy it now!")
-        .imageUrl("assets/images/products/coffeemugs/coffeemug-1005.png")
+        .imageUrl("/images/products/coffeemugs/coffeemug-1005.png")
         .price(19.99)
         .build();
 
@@ -331,7 +335,7 @@ public class MongoChangeLog {
         .description("Do you love mathematics? If so, then you need this elegant coffee mug with an amazing" +
             " fractal design. You don\\'t have to worry about boring coffee mugs anymore. This coffee mug" +
             " will be the topic of conversation in the office, guaranteed! Buy it now!")
-        .imageUrl("assets/images/products/coffeemugs/coffeemug-1006.png")
+        .imageUrl("/images/products/coffeemugs/coffeemug-1006.png")
         .price(21.99)
         .build();
 
@@ -340,7 +344,7 @@ public class MongoChangeLog {
         .description("Do you love mathematics? If so, then you need this elegant coffee mug with an amazing" +
             " fractal design. You don\\'t have to worry about boring coffee mugs anymore. This coffee mug" +
             " will be the topic of conversation in the office, guaranteed! Buy it now!")
-        .imageUrl("assets/images/products/coffeemugs/coffeemug-1007.png")
+        .imageUrl("/images/products/coffeemugs/coffeemug-1007.png")
         .price(22.99)
         .build();
 
@@ -349,7 +353,7 @@ public class MongoChangeLog {
         .description("Do you love mathematics? If so, then you need this elegant coffee mug with an amazing" +
             " fractal design. You don\\'t have to worry about boring coffee mugs anymore. This coffee mug" +
             " will be the topic of conversation in the office, guaranteed! Buy it now!")
-        .imageUrl("assets/images/products/coffeemugs/coffeemug-1008.png")
+        .imageUrl("/images/products/coffeemugs/coffeemug-1008.png")
         .price(21.99)
         .build();
 
@@ -358,7 +362,7 @@ public class MongoChangeLog {
         .description("Do you love mathematics? If so, then you need this elegant coffee mug with an amazing" +
             " fractal design. You don\\'t have to worry about boring coffee mugs anymore. This coffee mug" +
             " will be the topic of conversation in the office, guaranteed! Buy it now!")
-        .imageUrl("assets/images/products/coffeemugs/coffeemug-1009.png")
+        .imageUrl("/images/products/coffeemugs/coffeemug-1009.png")
         .price(13.99)
         .build();
 
@@ -367,7 +371,7 @@ public class MongoChangeLog {
         .description("Do you love mathematics? If so, then you need this elegant coffee mug with an amazing" +
             " fractal design. You don\\'t have to worry about boring coffee mugs anymore. This coffee mug" +
             " will be the topic of conversation in the office, guaranteed! Buy it now!")
-        .imageUrl("assets/images/products/coffeemugs/coffeemug-1010.png")
+        .imageUrl("/images/products/coffeemugs/coffeemug-1010.png")
         .price(21.99)
         .build();
 
@@ -376,7 +380,7 @@ public class MongoChangeLog {
         .description("Do you love mathematics? If so, then you need this elegant coffee mug with an amazing" +
             " fractal design. You don\\'t have to worry about boring coffee mugs anymore. This coffee mug" +
             " will be the topic of conversation in the office, guaranteed! Buy it now!")
-        .imageUrl("assets/images/products/coffeemugs/coffeemug-1011.png")
+        .imageUrl("/images/products/coffeemugs/coffeemug-1011.png")
         .price(24.99)
         .build();
 
@@ -385,7 +389,7 @@ public class MongoChangeLog {
         .description("Do you love mathematics? If so, then you need this elegant coffee mug with an amazing" +
             " fractal design. You don\\'t have to worry about boring coffee mugs anymore. This coffee mug" +
             " will be the topic of conversation in the office, guaranteed! Buy it now!")
-        .imageUrl("assets/images/products/coffeemugs/coffeemug-1012.png")
+        .imageUrl("/images/products/coffeemugs/coffeemug-1012.png")
         .price(21.99)
         .build();
 
@@ -394,7 +398,7 @@ public class MongoChangeLog {
         .description("Do you love mathematics? If so, then you need this elegant coffee mug with an amazing" +
             " fractal design. You don\\'t have to worry about boring coffee mugs anymore. This coffee mug" +
             " will be the topic of conversation in the office, guaranteed! Buy it now!")
-        .imageUrl("assets/images/products/coffeemugs/coffeemug-1006.png")
+        .imageUrl("/images/products/coffeemugs/coffeemug-1006.png")
         .price(22.99)
         .build();
 
@@ -403,7 +407,7 @@ public class MongoChangeLog {
         .description("Do you love mathematics? If so, then you need this elegant coffee mug with an amazing" +
             " fractal design. You don\\'t have to worry about boring coffee mugs anymore. This coffee mug" +
             " will be the topic of conversation in the office, guaranteed! Buy it now!")
-        .imageUrl("assets/images/products/coffeemugs/coffeemug-1014.png")
+        .imageUrl("/images/products/coffeemugs/coffeemug-1014.png")
         .price(21.99)
         .build();
 
@@ -412,7 +416,7 @@ public class MongoChangeLog {
         .description("Do you love mathematics? If so, then you need this elegant coffee mug with an amazing" +
             " fractal design. You don\\'t have to worry about boring coffee mugs anymore. This coffee mug" +
             " will be the topic of conversation in the office, guaranteed! Buy it now!")
-        .imageUrl("assets/images/products/coffeemugs/coffeemug-1015.png")
+        .imageUrl("/images/products/coffeemugs/coffeemug-1015.png")
         .price(30.99)
         .build();
 
@@ -421,7 +425,7 @@ public class MongoChangeLog {
         .description("Do you love mathematics? If so, then you need this elegant coffee mug with an amazing" +
             " fractal design. You don\\'t have to worry about boring coffee mugs anymore. This coffee mug" +
             " will be the topic of conversation in the office, guaranteed! Buy it now!")
-        .imageUrl("assets/images/products/coffeemugs/coffeemug-1016.png")
+        .imageUrl("/images/products/coffeemugs/coffeemug-1016.png")
         .price(21.99)
         .build();
 
@@ -430,7 +434,7 @@ public class MongoChangeLog {
         .description("Do you love mathematics? If so, then you need this elegant coffee mug with an amazing" +
             " fractal design. You don\\'t have to worry about boring coffee mugs anymore. This coffee mug" +
             " will be the topic of conversation in the office, guaranteed! Buy it now!")
-        .imageUrl("assets/images/products/coffeemugs/coffeemug-1017.png")
+        .imageUrl("/images/products/coffeemugs/coffeemug-1017.png")
         .price(11.99)
         .build();
 
@@ -439,7 +443,7 @@ public class MongoChangeLog {
         .description("Do you love mathematics? If so, then you need this elegant coffee mug with an amazing" +
             " fractal design. You don\\'t have to worry about boring coffee mugs anymore. This coffee mug" +
             " will be the topic of conversation in the office, guaranteed! Buy it now!")
-        .imageUrl("assets/images/products/coffeemugs/coffeemug-1018.png")
+        .imageUrl("/images/products/coffeemugs/coffeemug-1018.png")
         .price(29.99)
         .build();
 
@@ -448,7 +452,7 @@ public class MongoChangeLog {
         .description("Do you love mathematics? If so, then you need this elegant coffee mug with an amazing" +
             " fractal design. You don\\'t have to worry about boring coffee mugs anymore. This coffee mug" +
             " will be the topic of conversation in the office, guaranteed! Buy it now!")
-        .imageUrl("assets/images/products/coffeemugs/coffeemug-1019.png")
+        .imageUrl("/images/products/coffeemugs/coffeemug-1019.png")
         .price(21.99)
         .build();
 
@@ -457,7 +461,7 @@ public class MongoChangeLog {
         .description("Do you love mathematics? If so, then you need this elegant coffee mug with an amazing" +
             " fractal design. You don\\'t have to worry about boring coffee mugs anymore. This coffee mug" +
             " will be the topic of conversation in the office, guaranteed! Buy it now!")
-        .imageUrl("assets/images/products/coffeemugs/coffeemug-1020.png")
+        .imageUrl("/images/products/coffeemugs/coffeemug-1020.png")
         .price(25.99)
         .build();
 
@@ -466,7 +470,7 @@ public class MongoChangeLog {
         .description("Do you love mathematics? If so, then you need this elegant coffee mug with an amazing" +
             " fractal design. You don\\'t have to worry about boring coffee mugs anymore. This coffee mug" +
             " will be the topic of conversation in the office, guaranteed! Buy it now!")
-        .imageUrl("assets/images/products/coffeemugs/coffeemug-1021.png")
+        .imageUrl("/images/products/coffeemugs/coffeemug-1021.png")
         .price(13.99)
         .build();
 
@@ -475,7 +479,7 @@ public class MongoChangeLog {
         .description("Do you love mathematics? If so, then you need this elegant coffee mug with an amazing" +
             " fractal design. You don\\'t have to worry about boring coffee mugs anymore. This coffee mug" +
             " will be the topic of conversation in the office, guaranteed! Buy it now!")
-        .imageUrl("assets/images/products/coffeemugs/coffeemug-1022.png")
+        .imageUrl("/images/products/coffeemugs/coffeemug-1022.png")
         .price(22.99)
         .build();
 
@@ -484,7 +488,7 @@ public class MongoChangeLog {
         .description("Do you love mathematics? If so, then you need this elegant coffee mug with an amazing" +
             " fractal design. You don\\'t have to worry about boring coffee mugs anymore. This coffee mug" +
             " will be the topic of conversation in the office, guaranteed! Buy it now!")
-        .imageUrl("assets/images/products/coffeemugs/coffeemug-1023.png")
+        .imageUrl("/images/products/coffeemugs/coffeemug-1023.png")
         .price(21.99)
         .build();
 
@@ -493,7 +497,7 @@ public class MongoChangeLog {
         .description("Do you love mathematics? If so, then you need this elegant coffee mug with an amazing" +
             " fractal design. You don\\'t have to worry about boring coffee mugs anymore. This coffee mug" +
             " will be the topic of conversation in the office, guaranteed! Buy it now!")
-        .imageUrl("assets/images/products/coffeemugs/coffeemug-1024.png")
+        .imageUrl("/images/products/coffeemugs/coffeemug-1024.png")
         .price(21.99)
         .build();
 
@@ -514,7 +518,7 @@ public class MongoChangeLog {
   @ChangeSet(order = "003", id = "initProducer", author = "ming")
   public void initProducer(MongockTemplate db) {
     var producerId = UUID.randomUUID().toString();
-    var producer = new Producer(producerId, "Socket");
+    var producer = new Producer(producerId, "socket", "Socket");
     db.save(producer);
     var productCollection = db.getCollection("product");
     var updateQuery = set("producerId", producerId);

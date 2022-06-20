@@ -15,4 +15,5 @@ public class Producer {
   @Id
   private String id;
   private String name;
+  private String displayName;
 }

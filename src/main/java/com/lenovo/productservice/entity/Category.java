@@ -17,5 +17,6 @@ public class Category {
   @Id
   private String id;
   private String name;
+  private String displayName;
   private Integer count;
 }

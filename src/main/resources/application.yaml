@@ -1,7 +1,11 @@
 spring:
   data:
     mongodb:
-      uri: mongodb://localhost:27017/test
+      uri: mongodb://localhost:27017/ming
+  servlet:
+    multipart:
+      max-request-size: 1048576000
+      max-file-size: 1048576000
 
 mongock:
   change-logs-scan-package: com.lenovo.productservice.repository.changelog
@@ -22,9 +26,7 @@ swagger:
 
 application:
   web-security-config:
-    custom-unsecured-endpoints: /products/**, /reviews/product/*, /cart
+    custom-unsecured-endpoints: /products/**, /reviews/product/*, /cart, /test
 
 account-service:
   url: http://localhost:8094
-
-
