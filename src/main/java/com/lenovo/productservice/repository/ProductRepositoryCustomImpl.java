@@ -23,8 +23,7 @@ public class ProductRepositoryCustomImpl implements ProductRepositoryCustom {
   private static final String NAME = "name";
   private static final String DESCRIPTION = "description";
   private static final String CATEGORY_ID = "categoryId";
-  private static final String LANGUAGE = "en";
-  private static final String PRODUCT_ID = "_id";
+  private static final String PRODUCER_ID = "producerId";
 
   private final MongoTemplate mongoTemplate;
 
@@ -48,7 +47,7 @@ public class ProductRepositoryCustomImpl implements ProductRepositoryCustom {
       criteriaList.add(Criteria.where(CATEGORY_ID).is(categoryId));
     }
     if (isNotEmpty(producerId)) {
-      criteriaList.add(Criteria.where(CATEGORY_ID).is(categoryId));
+      criteriaList.add(Criteria.where(PRODUCER_ID).is(producerId));
     }
     return new Criteria().andOperator(criteriaList.toArray(new Criteria[0]));
   }

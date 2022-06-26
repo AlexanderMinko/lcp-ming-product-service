@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @Data
-public class AppConfig {
+public class ProductServiceProperties {
 
   @Value("${account-service.url}")
   private String accountServiceUrl;

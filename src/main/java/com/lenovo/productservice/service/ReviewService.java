@@ -7,7 +7,7 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
-import com.lenovo.productservice.config.AppConfig;
+import com.lenovo.productservice.config.ProductServiceProperties;
 import com.lenovo.productservice.entity.Review;
 import com.lenovo.productservice.entity.dto.ChildReviewResponseDto;
 import com.lenovo.productservice.entity.dto.ReviewRequestDto;
@@ -29,7 +29,7 @@ public class ReviewService {
 
   private final ReviewRepository reviewRepository;
   private final WebClient webClient;
-  private final AppConfig config;
+  private final ProductServiceProperties productServiceProperties;
 
   public Review getReviewById(String id) {
     Review review = reviewRepository.findById(id)
@@ -130,7 +130,7 @@ public class ReviewService {
   private List<Account> retrieveAccounts(Set<String> accountIds) {
     var accounts = webClient
         .post()
-        .uri(config.getAccountServiceUrl() + "/accounts")
+        .uri(productServiceProperties.getAccountServiceUrl() + "/accounts")
         .bodyValue(accountIds)
         .retrieve()
         .bodyToMono(new ParameterizedTypeReference<List<Account>>() {})

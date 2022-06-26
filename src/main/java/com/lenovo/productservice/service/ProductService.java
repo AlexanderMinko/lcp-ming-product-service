@@ -120,7 +120,7 @@ public class ProductService {
 
   private Producer getProducer(String producerId) {
     return producerRepository.findById(producerId)
-        .orElseThrow(() -> new RuntimeException("Producer not fount with id: " + producerId));
+        .orElseThrow(() -> new RuntimeException("Producer not found with id: " + producerId));
   }
 
   private Category getCategory(String categoryId) {

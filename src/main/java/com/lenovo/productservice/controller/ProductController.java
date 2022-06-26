@@ -41,7 +41,7 @@ public class ProductController {
   }
 
   @PostMapping("/by-ids")
-  public ResponseEntity<List<Product>> getProductsByIds(@RequestBody Set<String> ids) {
+  public ResponseEntity<List<Product>> getProductsByIds(@RequestBody(required = false) Set<String> ids) {
     return ResponseEntity.ok(productService.getProducts(ids));
   }
 
