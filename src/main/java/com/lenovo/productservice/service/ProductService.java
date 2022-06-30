@@ -1,6 +1,7 @@
 package com.lenovo.productservice.service;
 
 import java.io.IOException;
+import java.time.Instant;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -29,19 +30,15 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
-@Slf4j
 public class ProductService {
 
   private final ProductRepository productRepository;
-  private final CategoryRepository categoryRepository;
-  private final ProducerRepository producerRepository;
+  private final CategoryService categoryService;
+  private final ProducerService producerService;
   private final MinioStoreService minioStoreService;
-
-  public List<Product> getList() {
-    return productRepository.findAll();
-  }
 
   public Page<ProductResponseDto> getProducts(
       String freeText,
@@ -61,16 +58,8 @@ public class ProductService {
         : productRepository.findBySearchParams(freeText, categoryId, producerId, pageable);
   }
 
-  public List<Category> getCategories() {
-    List<Category> categories = categoryRepository.findAll();
-    log.debug("{} categories found", categories.size());
-    return categories;
-  }
-
-  public List<Producer> getProducers() {
-    List<Producer> producers = producerRepository.findAll();
-    log.debug("{} producers found", producers.size());
-    return producers;
+  public Integer countAllProductsByCategoryId(String categoryId) {
+    return productRepository.countAllByCategoryId(categoryId);
   }
 
   public Product getProductById(String id) {
@@ -84,10 +73,11 @@ public class ProductService {
     return CollectionUtils.isEmpty(ids) ? productRepository.findAll() : productRepository.findProductByIdIn(ids);
   }
 
-  public void createProduct(CreateProductParam createProductParam, MultipartFile multipartRequest) {
-    var category = getCategory(createProductParam.getCategory());
+  public Product createProduct(CreateProductParam createProductParam, MultipartFile multipartRequest) {
+    var category = categoryService.getCategory(createProductParam.getCategory());
     var product = new Product();
     product.setId(UUID.randomUUID().toString());
+    product.setCreatedDate(Instant.now());
     product.setName(createProductParam.getName());
     product.setDescription(createProductParam.getDescription());
     product.setPrice(Double.parseDouble(createProductParam.getPrice()));
@@ -95,7 +85,8 @@ public class ProductService {
     product.setCategoryId(createProductParam.getCategory());
     product.setImageUrl(uploadPhoto(multipartRequest, category.getName()));
     var savedProduct = productRepository.save(product);
-    System.out.println(productRepository.findById(savedProduct.getId()));
+    log.debug("Product successfully saved with ID: {}", savedProduct.getId());
+    return savedProduct;
   }
 
   private String uploadPhoto(final MultipartFile photo, String categoryName) {
@@ -113,18 +104,8 @@ public class ProductService {
   }
 
   private ProductResponseDto convertFromProductToDto(Product product) {
-    var producer = getProducer(product.getProducerId());
-    var category = getCategory(product.getCategoryId());
+    var producer = producerService.getProducer(product.getProducerId());
+    var category = categoryService.getCategory(product.getCategoryId());
     return new ProductResponseDto(product, category, producer);
-  }
-
-  private Producer getProducer(String producerId) {
-    return producerRepository.findById(producerId)
-        .orElseThrow(() -> new RuntimeException("Producer not found with id: " + producerId));
-  }
-
-  private Category getCategory(String categoryId) {
-    return categoryRepository.findById(categoryId)
-        .orElseThrow(() -> new RuntimeException("Category not fount for id: " + categoryId));
   }
 }

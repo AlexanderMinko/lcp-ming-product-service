@@ -26,7 +26,7 @@ swagger:
 
 application:
   web-security-config:
-    custom-unsecured-endpoints: /products/**, /reviews/product/*, /cart, /test
+    custom-unsecured-endpoints: /products/**, /reviews/product/*, /cart, /test, /categories, /producers
 
 account-service:
   url: http://localhost:8094

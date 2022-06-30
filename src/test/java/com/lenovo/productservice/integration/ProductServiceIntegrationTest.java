@@ -61,21 +61,6 @@ public class ProductServiceIntegrationTest {
     productRepository.deleteAll();
   }
 
-  //-----------------------------------------GET /list------------------------------------------------------------------
-
-  @Test
-  void shouldReturnListProducts() throws JsonProcessingException {
-    productRepository.saveAll(stubProducts());
-    webTestClient
-        .get()
-        .uri(PRODUCT_SERVICE_URL + "/list")
-        .exchange()
-        .expectStatus()
-        .isOk()
-        .expectBody()
-        .json(MAPPER.writeValueAsString(stubProducts()));
-  }
-
   //-----------------------------------------GET /by-ids----------------------------------------------------------------
 
   @Test

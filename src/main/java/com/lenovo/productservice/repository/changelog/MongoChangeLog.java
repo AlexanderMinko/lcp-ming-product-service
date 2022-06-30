@@ -23,7 +23,6 @@ public class MongoChangeLog {
         .id(UUID.randomUUID().toString())
         .displayName("Books")
         .name("books")
-        .count(25)
         .build();
     var savedCategory = db.save(books);
 
@@ -271,7 +270,6 @@ public class MongoChangeLog {
         .id(UUID.randomUUID().toString())
         .name("coffeemugs")
         .displayName("Coffee Mugs")
-        .count(25)
         .build();
 
     var savedCoffeeMugsCategory = db.save(coffeeMugsCategory);
@@ -518,7 +516,7 @@ public class MongoChangeLog {
   @ChangeSet(order = "003", id = "initProducer", author = "ming")
   public void initProducer(MongockTemplate db) {
     var producerId = UUID.randomUUID().toString();
-    var producer = new Producer(producerId, "socket", "Socket");
+    var producer = new Producer(producerId, "socket", "Socket", "Socket producer description");
     db.save(producer);
     var productCollection = db.getCollection("product");
     var updateQuery = set("producerId", producerId);

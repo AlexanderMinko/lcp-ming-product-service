@@ -1,5 +1,10 @@
 package com.lenovo.productservice.entity;
 
+import java.time.Instant;
+import java.util.List;
+
+import com.lenovo.productservice.entity.model.Video;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,6 +25,8 @@ public class Product {
   private String description;
   private String imageUrl;
   private Double price;
+  private List<Video> videos;
+  private Instant createdDate;
   private String categoryId;
   private String producerId;
 }

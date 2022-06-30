@@ -1,22 +1,18 @@
-package com.lenovo.productservice.entity;
+package com.lenovo.productservice.entity.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Document
-@Builder
-public class Producer {
-
-  @Id
-  private String id;
+public class Video {
   private String name;
   private String displayName;
   private String description;
+  private String url;
+  private Long size;
 }

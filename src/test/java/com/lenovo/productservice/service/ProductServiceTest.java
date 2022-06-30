@@ -54,20 +54,6 @@ public class ProductServiceTest {
   @Mock
   private MinioStoreService minioStoreService;
 
-  //-----------------------------------------getList()------------------------------------------------------------------
-
-  @Test
-  void shouldReturnListOfProducts() {
-
-    //given
-    given(productRepository.findAll()).willReturn(stubProducts());
-
-    //when
-    var actual =  productService.getList();
-
-    //then
-    assertThat(actual).isEqualTo(stubProducts());
-  }
 
   //-----------------------------------------getProducts(Set<String> ids)-----------------------------------------------
 

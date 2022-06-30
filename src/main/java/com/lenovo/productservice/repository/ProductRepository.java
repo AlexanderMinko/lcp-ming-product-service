@@ -16,4 +16,6 @@ public interface ProductRepository extends MongoRepository<Product, String>, Pro
   Page<Product> findByCategoryId(String id, Pageable pageable);
 
   List<Product> findProductByIdIn(Collection<String> id);
+
+  Integer countAllByCategoryId(String categoryId);
 }

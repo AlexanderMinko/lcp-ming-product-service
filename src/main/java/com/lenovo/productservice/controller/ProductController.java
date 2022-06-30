@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -35,47 +36,35 @@ public class ProductController {
 
   private final ProductService productService;
 
-  @GetMapping("/list")
-  public ResponseEntity<List<Product>> list() {
-    return new ResponseEntity<>(productService.getList(), HttpStatus.OK);
-  }
-
-  @PostMapping("/by-ids")
-  public ResponseEntity<List<Product>> getProductsByIds(@RequestBody(required = false) Set<String> ids) {
-    return ResponseEntity.ok(productService.getProducts(ids));
-  }
-
   @GetMapping
   @PageableAsQueryParam
-  public ResponseEntity<Page<ProductResponseDto>> getProducts(
+  @ResponseStatus(HttpStatus.OK)
+  public Page<ProductResponseDto> getProducts(
       @Parameter(hidden = true) @PageableDefault(size = 20, sort = {"name"}) Pageable pageable,
       @RequestParam(name = "category_id", required = false) String categoryId,
       @RequestParam(name = "producer_id", required = false) String producerId,
       @RequestParam(name = "free_text", required = false) String freeText) {
-    return new ResponseEntity<>(productService.getProducts(freeText, categoryId, producerId, pageable), HttpStatus.OK);
-  }
-
-  @PostMapping
-  public ResponseEntity<Void> createProduct(
-      @RequestPart("createParamJson") CreateProductParam createProductParam,
-      @RequestPart("imageFile") MultipartFile multipartRequest) {
-    productService.createProduct(createProductParam, multipartRequest);
-    return new ResponseEntity<>(HttpStatus.CREATED);
+    return productService.getProducts(freeText, categoryId, producerId, pageable);
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<Product> getProductById(@PathVariable String id) {
-    return new ResponseEntity<>(productService.getProductById(id), HttpStatus.OK);
+  @ResponseStatus(HttpStatus.OK)
+  public Product getProductById(@PathVariable String id) {
+    return productService.getProductById(id);
   }
 
-  @GetMapping("/categories")
-  public ResponseEntity<List<Category>> getCategories() {
-    return new ResponseEntity<>(productService.getCategories(), HttpStatus.OK);
+  @PostMapping("/by-ids")
+  @ResponseStatus(HttpStatus.OK)
+  public List<Product> getProductsByIds(@RequestBody(required = false) Set<String> ids) {
+    return productService.getProducts(ids);
   }
 
-  @GetMapping("/producers")
-  public ResponseEntity<List<Producer>> getProducers() {
-    return new ResponseEntity<>(productService.getProducers(), HttpStatus.OK);
+  @PostMapping
+  @ResponseStatus(HttpStatus.CREATED)
+  public Product createProduct(
+      @RequestPart("createParamJson") CreateProductParam createProductParam,
+      @RequestPart("imageFile") MultipartFile multipartRequest) {
+    return productService.createProduct(createProductParam, multipartRequest);
   }
 
 }

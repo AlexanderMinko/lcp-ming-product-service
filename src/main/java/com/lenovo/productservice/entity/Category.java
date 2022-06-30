@@ -18,5 +18,5 @@ public class Category {
   private String id;
   private String name;
   private String displayName;
-  private Integer count;
+  private String description;
 }

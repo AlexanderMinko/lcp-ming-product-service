@@ -1,5 +1,7 @@
 package com.lenovo.productservice.entity.dto;
 
+import java.time.Instant;
+
 import com.lenovo.productservice.entity.Category;
 import com.lenovo.productservice.entity.Producer;
 import com.lenovo.productservice.entity.Product;
@@ -20,6 +22,7 @@ public class ProductResponseDto {
   private String description;
   private String imageUrl;
   private Double price;
+  private Instant createdDate;
   private Category category;
   private Producer producer;
 
