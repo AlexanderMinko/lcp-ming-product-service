@@ -4,8 +4,8 @@ spring:
       uri: mongodb://localhost:27017/ming
   servlet:
     multipart:
-      max-request-size: 1048576000
-      max-file-size: 1048576000
+      max-request-size: 10000MB
+      max-file-size: 10000MB
 
 mongock:
   change-logs-scan-package: com.lenovo.productservice.repository.changelog

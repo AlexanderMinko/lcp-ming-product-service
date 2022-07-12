@@ -2,20 +2,20 @@ package com.lenovo.productservice.service;
 
 import java.io.IOException;
 import java.time.Instant;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 import com.lenovo.exception.ProductNotFound;
+import com.lenovo.model.FileInfoDto;
 import com.lenovo.model.FileUri;
-import com.lenovo.productservice.entity.Category;
-import com.lenovo.productservice.entity.Producer;
 import com.lenovo.productservice.entity.Product;
 import com.lenovo.productservice.entity.dto.ProductResponseDto;
+import com.lenovo.productservice.entity.model.Video;
 import com.lenovo.productservice.entity.param.CreateProductParam;
-import com.lenovo.productservice.repository.CategoryRepository;
-import com.lenovo.productservice.repository.ProducerRepository;
 import com.lenovo.productservice.repository.ProductRepository;
 import com.lenovo.service.MinioStoreService;
 
@@ -65,7 +65,7 @@ public class ProductService {
   public Product getProductById(String id) {
     Product product = productRepository.findById(id)
         .orElseThrow(() -> new ProductNotFound("product not found with id - " + id));
-    log.debug("In getProductById - product: {} found", product);
+    log.debug("Founded product with id: {}", id);
     return product;
   }
 
@@ -95,7 +95,7 @@ public class ProductService {
           .folderName("images/products/" + categoryName)
           .extension(FilenameUtils.getExtension(photo.getOriginalFilename()))
           .build();
-      final var fileInfoDto = minioStoreService.putObjectToStorage(photo.getInputStream(), photo.getSize(), uri);
+      final var fileInfoDto = minioStoreService.putObjectToPublicStorage(photo.getInputStream(), photo.getSize(), uri);
       log.info("Uploading file successful, downloadUri: {}", fileInfoDto.getDownloadUri());
       return fileInfoDto.getDownloadUri();
     } catch (IOException e) {
@@ -107,5 +107,62 @@ public class ProductService {
     var producer = producerService.getProducer(product.getProducerId());
     var category = categoryService.getCategory(product.getCategoryId());
     return new ProductResponseDto(product, category, producer);
+  }
+
+  public void uploadVideos(String id, MultipartFile[] files) {
+    var futures = Arrays.stream(files)
+        .map(file -> CompletableFuture.runAsync(() -> uploadVideo(id, file)))
+        .collect(Collectors.toList());
+
+    futures.forEach(CompletableFuture::join);
+  }
+
+  public void uploadVideo(String id, MultipartFile file) {
+    var exists = productRepository.existsById(id);
+    if (!exists) {
+      throw new RuntimeException("file not exists with id: " + id);
+    }
+    log.info("Uploading file: {}", file.getOriginalFilename());
+    try {
+      var uri = FileUri.builder()
+          .folderName("videos/products/" + id)
+          .extension(FilenameUtils.getExtension(file.getOriginalFilename()))
+          .build();
+      var fileInfoDto = minioStoreService.putObjectToPublicStorage(file.getInputStream(), file.getSize(), uri);
+      log.info("Uploaded file: {} successful, downloadUri: {}", file.getOriginalFilename(),
+          fileInfoDto.getDownloadUri());
+      assignFileToProduct(id, file, fileInfoDto);
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  private synchronized void assignFileToProduct(String id, MultipartFile file, FileInfoDto fileInfoDto) {
+    var product = getProductById(id);
+    var video = Video.builder()
+        .description("Video of product: " + product.getName())
+        .name(file.getOriginalFilename())
+        .displayName(file.getOriginalFilename())
+        .size(fileInfoDto.getFileSize())
+        .url(fileInfoDto.getDownloadUri())
+        .build();
+    product.addVideo(video);
+    productRepository.save(product);
+    log.debug("Updated product with id: {}", id);
+  }
+
+  public void deleteVideo(String productId, String videoName) {
+    var product = getProductById(productId);
+    if (CollectionUtils.isEmpty(product.getVideos())) {
+      return;
+    }
+    var videoToRemove = product.getVideos()
+        .stream()
+        .filter(video -> videoName.equals(video.getName()))
+        .findFirst()
+        .orElseThrow(() -> new RuntimeException("Video does not exist with name: " + videoName));
+    product.getVideos().remove(videoToRemove);
+    productRepository.save(product);
+    log.debug("Updated product with id: {}, removed video with name: {}", productId, videoName);
   }
 }

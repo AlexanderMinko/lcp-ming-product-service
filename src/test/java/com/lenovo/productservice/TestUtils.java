@@ -55,7 +55,6 @@ public class TestUtils {
         .id(CATEGORY_UUID)
         .name("books")
         .displayName("Books")
-        .count(3)
         .build();
   }
 
